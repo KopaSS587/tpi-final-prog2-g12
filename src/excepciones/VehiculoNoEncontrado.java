@@ -1,7 +1,7 @@
 package src.excepciones;
 
-public class VehiculoNoEncontradoException extends Exception {
-    public VehiculoNoEncontradoException(String mensaje) {
+public class VehiculoNoEncontrado extends Exception {
+    public VehiculoNoEncontrado(String mensaje) {
 
         super(mensaje);
     }
