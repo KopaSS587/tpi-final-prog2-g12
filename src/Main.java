@@ -46,7 +46,7 @@ public class Main {
     }
 
     private static void mostrarMenu() {
-        System.out.println("""
+        System.out.println();
                 
                 ===========================
                 MENÚ - SISTEMA ESTACIONAMIENTO
