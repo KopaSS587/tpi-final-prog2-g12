@@ -1,6 +1,6 @@
 package src;
 
-import src.excepciones.VehiculoNoEncontradoException;
+import src.excepciones.VehiculoNoEncontrado;
 import src.interfaces.Tarifa;
 import src.modelos.*;
 import src.modelos.TarifaPorHorario;
@@ -108,9 +108,7 @@ public class Main {
             System.out.println("Patente inválida. Operación cancelada.");
             return;
         }
-
         try {
-
             Function<Ticket, Double> calcularMonto = ticket -> {
                 long minutos = ticket.calcularMinutos();
                 return ticket.getVehiculo().calcularTarifa(minutos);
@@ -119,7 +117,7 @@ public class Main {
             estacionamiento.registrarSalida(patente, calcularMonto);
             System.out.println("Salida procesada y monto calculado.");
 
-        } catch (VehiculoNoEncontradoException e) {
+        } catch (VehiculoNoEncontrado e) {
             System.out.println(e.getMessage());
         }
     }
@@ -134,7 +132,7 @@ public class Main {
             System.out.println("Vehículo encontrado:");
             System.out.println(t);
             System.out.println("Solicitud completada correctamente.");
-        } catch (VehiculoNoEncontradoException e) {
+        } catch (VehiculoNoEncontrado e) {
             System.out.println(e.getMessage());
         }
     }
@@ -169,7 +167,7 @@ public class Main {
         try {
             estacionamiento.eliminarPorPatente(patente);
             System.out.println("Vehículo eliminado correctamente.");
-        } catch (VehiculoNoEncontradoException e) {
+        } catch (VehiculoNoEncontrado e) {
             System.out.println(e.getMessage());
         }
     }
@@ -184,7 +182,7 @@ public class Main {
             estacionamiento.buscarPorPatente(patente);
             System.out.println("El vehículo todavía NO se retiró del estacionamiento.");
             return;
-        } catch (VehiculoNoEncontradoException ignored) {}
+        } catch (VehiculoNoEncontrado ignored) {}
 
         List<Ticket> lista = estacionamiento.buscarHistoricoPorPatente(patente);
 
