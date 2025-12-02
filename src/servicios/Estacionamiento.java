@@ -1,6 +1,6 @@
 package src.servicios;
 
-import src.excepciones.VehiculoNoEncontradoException;
+import src.excepciones.VehiculoNoEncontrado;
 import src.modelos.Ticket;
 import src.modelos.Vehiculo;
 import src.modelos.SimpleLinkedList;
@@ -37,14 +37,14 @@ public class Estacionamiento {
 
 
     public void registrarSalida(String patente, java.util.function.Function<Ticket, Double> calculoMonto)
-            throws VehiculoNoEncontradoException {
+            throws VehiculoNoEncontrado {
 
         patente = patente.toUpperCase();
 
         Ticket t = ocupados.remove(patente);
 
         if (t == null) {
-            throw new VehiculoNoEncontradoException(
+            throw new VehiculoNoEncontrado(
                     "No es posible registrar la salida: el vehículo no está en el estacionamiento."
             );
         }
@@ -64,12 +64,12 @@ public class Estacionamiento {
 
 
 
-    public Ticket buscarPorPatente(String patente) throws VehiculoNoEncontradoException {
+    public Ticket buscarPorPatente(String patente) throws VehiculoNoEncontrado {
         patente = patente.toUpperCase();
         Ticket t = ocupados.get(patente);
 
         if (t == null)
-            throw new VehiculoNoEncontradoException("El vehículo con esa patente no existe dentro del estacionamiento.");
+            throw new VehiculoNoEncontrado("El vehículo con esa patente no existe dentro del estacionamiento.");
 
         return t;
     }
@@ -123,13 +123,13 @@ public class Estacionamiento {
     }
 
 
-    public void eliminarPorPatente(String patente) throws VehiculoNoEncontradoException {
+    public void eliminarPorPatente(String patente) throws VehiculoNoEncontrado {
         patente = patente.toUpperCase();
 
         Ticket eliminado = ocupados.remove(patente);
 
         if (eliminado == null)
-            throw new VehiculoNoEncontradoException("No se puede eliminar: el vehículo no está dentro.");
+            throw new VehiculoNoEncontrado("No se puede eliminar: el vehículo no está dentro.");
 
         movimientos.insertAtEnd("Eliminado: " + patente + " (" + LocalDateTime.now() + ")");
 
