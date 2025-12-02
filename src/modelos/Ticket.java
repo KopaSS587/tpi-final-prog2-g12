@@ -43,7 +43,7 @@ public class Ticket {
         if (horaSalida == null) return 0;
         Duration d = Duration.between(horaEntrada, horaSalida);
         long mins = d.toMinutes();
-        return Math.max(mins, 0L);
+        return (mins<1) ? 1 : mins;
     }
 
     public String toString() {
